@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import connectDb from './connection.js';
+import cors from 'cors';
 // import authRoute from './Routes/authRoutes.js';
 import path from 'path';
 import {readdirSync} from 'fs';
@@ -10,6 +11,9 @@ dotenv.config();
  const app = express();
 
  const port = process.env.PORT || 3000;
+
+ app.use(express.json());
+ app.use(cors());
 
  // Making routes
 app.get('/',(req,res)=>{

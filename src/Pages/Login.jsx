@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
+  const[email,setEmail] = useState("");
+  const[password ,setPassword] = useState("");
   return (
     <div className='mt-20 sm:mt-10 min-h-screen flex justify-center items-center w-full'>
       <div className='w-full sm:w-[50vw] md:w-[30vw] rounded-3xl shadow-md px-5 py-6 bg-white'>
@@ -12,13 +14,25 @@ const Login = () => {
        {/* email */}
         <div className='mb-4'>
         <label className='block mb-2 text-gray-700 font-medium text-sm' htmlFor="email">Email Address</label>
-       <input className='w-full px-3 py-2 rounded-md shadow-md border border-gray-300 focus:outline-none focus:ring-black focus:border-black' type="email" id="email" name="email" placeholder='abc@gmail.com' />
+       <input className='w-full px-3 py-2 rounded-md shadow-md border border-gray-300 focus:outline-none focus:ring-black focus:border-black' type="email" 
+       id="email" 
+       name="email"
+       value={email}
+       onChange={()=>setEmail(e.target.value)}
+       placeholder='abc@gmail.com' />
         </div>
         
         {/* password */}
         <div className='mb-4'>
         <label className='block mb-2 text-gray-700 font-medium text-sm' htmlFor="email">Password</label>
-       <input className='w-full px-3 py-2 rounded-md shadow-md border border-gray-300 focus:outline-none focus:ring-black focus:border-black' type="password" id="password" name="password" placeholder='password' />
+       <input className='w-full px-3 py-2 rounded-md shadow-md border border-gray-300 focus:outline-none focus:ring-black focus:border-black'
+        type="password" 
+        id="password"
+         name="password"
+          value={password}
+         onChange={()=>setEmail(e.target.value)}
+
+         placeholder='password' />
         </div>
        
        {/* forgot password */}

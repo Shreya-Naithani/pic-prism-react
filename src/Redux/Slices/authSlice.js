@@ -19,10 +19,22 @@ const authSlice = createSlice({
             localStorage.setItem("accessToken",action.payload.accessToken);
             localStorage.setItem("refreshToken",action.payload.refreshToken);
             localStorage.setItem("role",action.payload.role);
-            localStorage.setItem("auhtor",action.payload.author);
+            localStorage.setItem("author",action.payload.author);
+          },
+          logout :(state)=>{
+            state.accessToken = null;
+            state.refreshToken = null;
+            state.role = null;
+            state.author = null;
+            state.isAuthenticated =false;
+            localStorage.removeItem("accessToken");
+            localStorage.removeItem("refreshToken");
+            localStorage.removeItem("role");
+            localStorage.removeItem("author");
+            
           }
     }
 });
 
-export const {login} = authSlice.actions;
+export const {login , logout} = authSlice.actions;
 export default authSlice.reducer;

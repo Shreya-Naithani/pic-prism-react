@@ -1,9 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link ,useLocation } from 'react-router-dom'
 
 const Navbar = () => {
+  const {pathname} =useLocation();
   return (
-    <nav className='flex flex-col sm:flex-row justify-between px-5 py-5 items-start sm:items-center fixed top-0 right-0 left-0 shadow-md gap-1 sm:gap-0 z-30 bg-white'>
+    <nav className={`flex flex-col sm:flex-row justify-between px-5 py-5 items-start sm:items-center  ${pathname === "/seller/profile" || pathname === "/buyer/profile" ? "hidden" : "fixed"} top-0 right-0 left-0 shadow-md gap-1 sm:gap-0 z-30 bg-white`}>
       {/* logo and its name */}
       <div className='flex justify-between items-center'>
         <img src="/picprismlogo.png" className='w-[50px]' alt="prism_logo"/>

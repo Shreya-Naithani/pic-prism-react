@@ -9,6 +9,7 @@ import  generateAccessToken  from "../Helpers/accessToken.js";
 export const signup = async(req,res)=>{
     try {
         const{username,email,password,accountType} = req.body;
+      
 
         let existingUser = await User.findOne({username});
         if(existingUser){

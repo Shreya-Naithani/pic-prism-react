@@ -18,7 +18,7 @@ const DashboardSidebar = () => {
   const author = useSelector((state) => state.auth.author);
 
   return (
-    <div className={`fixed z-10 ${!sidebar == true ? "-translate-x-[500px] sm:translate-x-0" : "translate-x-0"} flex text-lg font-semibold bg-white shadow-lg flex-col gap-2 w-fit min-h-screen p-3 list-none justify-between items-center `}>
+    <div className={`fixed z-10 ${!sidebar == true ? "-translate-x-[500px] sm:translate-x-0" : "translate-x-0"} ease-in-out duration-300 flex sm:static text-lg font-semibold bg-white shadow-lg flex-col gap-2 w-fit min-h-screen p-3 list-none justify-between items-center `}>
       <div>
         {/* Circle with first letter of name */}
         <div className="bg-black my-5 rounded-full w-fit py-4 px-6 text-white">

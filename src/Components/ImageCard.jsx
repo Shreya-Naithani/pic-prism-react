@@ -1,11 +1,11 @@
 import React from 'react';
 
 
-const ImageCard = ({id,img,title,author,price,icon1,icon2}) => {
+const ImageCard = ({id,image,title,author,price,icon1,icon2}) => {
   return (
     <div className='rounded-lg bg-white shadow-lg p-2'>
     <div className='w-full h-[200px] overflow-hidden rounded-2xl'>
-        <img className="w-full h-full hover:scale-105 transition-all duration-300  ease-linear  transform cursor-pointer" src={img} alt={title}/>
+        <img className="w-full h-full hover:scale-105 transition-all duration-300  ease-linear  transform cursor-pointer" src={image} alt={title}/>
     </div>
     <p className='font-semibold text-white  bg-black w-fit rounded-full px-5 text-sm mt-3 py-1'>{"@"+author.charAt(0).toUpperCase() +author.slice(1)}</p>
     <div className='flex justify-between items-center mt-2'>

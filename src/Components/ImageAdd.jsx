@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {toast} from 'react-hot-toast';
+import axios from 'axios';
 import useUpload from '../Hooks/useUpload';
 import { useSelector } from 'react-redux';
 import ProgressBar from '@ramonak/react-progress-bar';
@@ -31,15 +32,16 @@ try {
         toast.error("All fields are required");
     }
 
-    const {public_id , url} = await useUpload(image,onUploadProgress)
+    const {public_id , url} = await useUpload({image,onUploadProgress})
+  
     if(!public_id || !url){
         return toast.error("Image upload failed");
     }
-    const res = await axios.post(import.meta.env.VITE_API_URL + "/post/create" ,{
+    const res = await axios.post("http://localhost:4000/api/post/create" ,{
         title,
         price,
         image:url,
-        public_id :public_id,
+        publicId :public_id,
         author: author
     },{
         headers:{
@@ -47,6 +49,7 @@ try {
         },
     });
     const data =await res.data;
+    // console.log(data);
     if(data.success === true){
         toast.success(data.message);
         e.target.reset();
@@ -54,7 +57,7 @@ try {
         setProgress(0);
     }
 } catch (error) {
-   return toast.error(error.response.data.message);
+   return toast.error(error.message);
 }
 }
 

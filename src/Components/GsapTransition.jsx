@@ -7,6 +7,7 @@ import BuyerDashboard from '../Pages/BuyerDashboard'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import gsap from 'gsap';
 import {Toaster} from 'react-hot-toast'
+import ProtectedRoutes from './ProtectedRoutes'
 
 const GsapTransition = () => {
     const nodeRef =useRef(null);
@@ -29,10 +30,10 @@ const GsapTransition = () => {
         <Toaster/>
       <Routes location={location}>
     <Route path="/" element={<Home/>} />
-    <Route path="/login" element={<Login/>} />
-    <Route path="/signup" element={<Signup/>} />
-    <Route path="/seller/profile" element={<SellerDashboard/>} />
-    <Route path="/buyer/profile" element={<BuyerDashboard/>} />
+    <Route path="/login" element={<ProtectedRoutes children={<Login/>} requiresAuth={false}/>} />
+    <Route path="/signup" element={<ProtectedRoutes children={<Signup/>} requiresAuth={false}/>} />
+    <Route path="/seller/profile" element={<ProtectedRoutes children={<SellerDashboard/>} />} />
+    <Route path="/buyer/profile" element={<ProtectedRoutes children={<BuyerDashboard/>} />} />
    </Routes>
     </div>
   )

@@ -71,3 +71,79 @@ try {
     return res.status(500).json({success:false,message:error.message});
 }
 }
+
+export const deletePost = async(req,res)=>{
+try {
+    const {id} = req.params ;
+  const post = await Post.findById(id);
+  if(!post){
+    return res.status(404).json({success:false,message:"Post not found"});
+  }
+  const {authorId} = post
+  await User.findByIdAndUpdate(authorId,{
+    $pull : {uploads : id},
+  });
+  return res.status(200).json({success:true, message:"Post deleted successfully"});
+} catch (error) {
+    
+    return res.status(500).json({success:false,message:error.message});
+}
+}
+
+export const searchPost = async(req,res)=>{
+    const {search} = req.query;
+try {
+    const post =await Post.find({title:{$regex :search , $options:"i"}}); 
+    if(post.length === 0){
+        return res.status(404).json({success:false,message:"No Post found"});
+    }
+    return res.status(200).json({success:true,data:post});
+} catch (error) {
+    return res.status(500).json({success:false,message:error.message});
+}
+}
+
+export const addToFavourites = async(req,res)=>{
+try {
+    const {authorId} = req.id;
+    const postId = req.params;
+    const user = await User.findByIdAndUpdate(authorId,{
+        $push:{favourites:postId}
+    })
+    if(!user){
+        return res.status(404).json({success:false,message:"User not found"});
+    }
+    return res.status(200).json({success:true,message:"Post added to favourites"});
+} catch (error) {
+    return res.status(500).json({success:false,message:error.message});
+}
+}
+
+export const removeFromFavourites = async(req,res)=>{
+    try {
+        const {authorId} = req.id;
+        const postId = req.params;
+        const user = await User.findByIdAndUpdate(authorId,{
+            $pull:{favourites:postId}
+        })
+        if(!user){
+            return res.status(404).json({success:false,message:"User not found"});
+        }
+        return res.status(200).json({success:true,message:"Post removed from favourites"});
+    } catch (error) {
+        return res.status(500).json({success:false,message:error.message});
+    }
+ }
+
+ export const getFavourites = async(req,res)=>{
+    try {
+        const authorId = req.id;
+        const {favourites} = await User.findById(authorId).populate("favourites");
+        if(!favourites){
+            return res.status(404).json({success:false,message:"No favourites added"});
+        }
+        return res.status(200).json({success:true, data:favourites});
+     } catch (error) {
+        return res.status(500).json({success:false,message:error.message});
+    }
+ }
